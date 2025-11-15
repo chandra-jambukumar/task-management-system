@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-// Use environment variable for API URL in production, fallback to /api for development
+// API URL - hardcoded for deployment
+const API_URL = 'https://task-management-system-54j8.onrender.com';
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://task-management-system-54j8.onrender.com',
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
