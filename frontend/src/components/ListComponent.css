@@ -1,0 +1,114 @@
+.list {
+  min-width: 280px;
+  max-width: 280px;
+  background: #ebecf0;
+  border-radius: 8px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 150px);
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.list-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #172b4d;
+}
+
+.list-delete-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #6b778c;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  line-height: 1;
+}
+
+.list-delete-btn:hover {
+  color: #172b4d;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.list-cards {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.add-card-btn {
+  width: 100%;
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  color: #5e6c84;
+  font-weight: 500;
+}
+
+.add-card-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.add-card-form {
+  padding: 0.5rem;
+}
+
+.add-card-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 2px solid #0079bf;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 60px;
+  margin-bottom: 0.5rem;
+}
+
+.add-card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.add-card-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.add-card-actions button:first-child {
+  background: #0079bf;
+  color: white;
+}
+
+.add-card-actions button:first-child:hover {
+  background: #026aa7;
+}
+
+.add-card-actions button:last-child {
+  background: transparent;
+}
+
+.add-card-actions button:last-child:hover {
+  background: rgba(0, 0, 0, 0.1);
+}

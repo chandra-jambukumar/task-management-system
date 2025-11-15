@@ -1,0 +1,132 @@
+.board-view-container {
+  min-height: 100vh;
+  background: #0079bf;
+  display: flex;
+  flex-direction: column;
+}
+
+.board-header {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.board-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.back-btn {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.board-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.error-banner {
+  background: #dc3545;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.board-content {
+  flex: 1;
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.lists-container {
+  display: flex;
+  gap: 1rem;
+  min-height: 100%;
+  padding-bottom: 1rem;
+}
+
+.add-list-btn {
+  min-width: 280px;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  height: fit-content;
+}
+
+.add-list-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.add-list-form {
+  min-width: 280px;
+  background: #ebecf0;
+  padding: 0.5rem;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.add-list-form input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 2px solid #0079bf;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.add-list-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.add-list-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.add-list-actions button:first-child {
+  background: #0079bf;
+  color: white;
+}
+
+.add-list-actions button:first-child:hover {
+  background: #026aa7;
+}
+
+.add-list-actions button:last-child {
+  background: transparent;
+}
+
+.add-list-actions button:last-child:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.loading, .error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,26 @@
+# Render configuration for automatic deployment
+# Place this in your repository root
+
+services:
+  - type: web
+    name: task-management-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd backend && npm install && npm run build
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: CORS_ORIGIN
+        value: https://your-app-name.netlify.app
+      - key: DB_PATH
+        value: ./data/database.sqlite
+    disk:
+      name: database
+      mountPath: /opt/render/project/src/backend/data
+      sizeGB: 1

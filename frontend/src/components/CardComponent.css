@@ -1,0 +1,92 @@
+.card {
+  background: white;
+  border-radius: 4px;
+  padding: 0.75rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.card-header h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #172b4d;
+  flex: 1;
+  word-wrap: break-word;
+}
+
+.card-delete-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #6b778c;
+  padding: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.card-delete-btn:hover {
+  color: #172b4d;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.card-description {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.85rem;
+  color: #5e6c84;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.card-priority {
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.card-assigned-users {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #0079bf;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.card-comments {
+  font-size: 0.8rem;
+  color: #5e6c84;
+}
