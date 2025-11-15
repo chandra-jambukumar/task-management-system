@@ -7,12 +7,31 @@ import boardRoutes from './routes/boardRoutes';
 import listRoutes from './routes/listRoutes';
 import cardRoutes from './routes/cardRoutes';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
+import { initDb } from './config/database';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+
+const execAsync = promisify(exec);
 
 // Load environment variables
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Initialize database and run migrations
+const initializeDatabase = async () => {
+  try {
+    console.log('Initializing database...');
+    await initDb();
+    console.log('Running migrations...');
+    await execAsync('npm run migrate');
+    console.log('Database initialized successfully');
+  } catch (error) {
+    console.error('Database initialization error:', error);
+    // Continue anyway - migrations might already be run
+  }
+};
 
 // Middleware
 app.use(cors({
@@ -38,9 +57,14 @@ app.use('/api', cardRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Start server with database initialization
+initializeDatabase().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}).catch((error) => {
+  console.error('Failed to start server:', error);
+  process.exit(1);
 });
 
 export default app;
