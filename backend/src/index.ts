@@ -8,10 +8,6 @@ import listRoutes from './routes/listRoutes';
 import cardRoutes from './routes/cardRoutes';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 import { initDb } from './config/database';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-
-const execAsync = promisify(exec);
 
 // Load environment variables
 dotenv.config();
@@ -25,11 +21,72 @@ const initializeDatabase = async () => {
     console.log('Initializing database...');
     await initDb();
     console.log('Running migrations...');
-    await execAsync('npm run migrate');
+    
+    // Run migrations directly instead of using npm script
+    const { query } = await import('./config/database');
+    
+    // Create tables
+    await query(`
+      CREATE TABLE IF NOT EXISTS users (
+        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        email TEXT UNIQUE NOT NULL,
+        password_hash TEXT NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    
+    await query(`
+      CREATE TABLE IF NOT EXISTS boards (
+        board_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        description TEXT,
+        created_by INTEGER NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (created_by) REFERENCES users(user_id)
+      )
+    `);
+    
+    await query(`
+      CREATE TABLE IF NOT EXISTS board_members (
+        board_id INTEGER NOT NULL,
+        user_id INTEGER NOT NULL,
+        role TEXT DEFAULT 'member',
+        PRIMARY KEY (board_id, user_id),
+        FOREIGN KEY (board_id) REFERENCES boards(board_id) ON DELETE CASCADE,
+        FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+      )
+    `);
+    
+    await query(`
+      CREATE TABLE IF NOT EXISTS lists (
+        list_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        board_id INTEGER NOT NULL,
+        name TEXT NOT NULL,
+        position INTEGER NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (board_id) REFERENCES boards(board_id) ON DELETE CASCADE
+      )
+    `);
+    
+    await query(`
+      CREATE TABLE IF NOT EXISTS cards (
+        card_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        list_id INTEGER NOT NULL,
+        title TEXT NOT NULL,
+        description TEXT,
+        position INTEGER NOT NULL,
+        priority TEXT DEFAULT 'medium',
+        due_date DATETIME,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (list_id) REFERENCES lists(list_id) ON DELETE CASCADE
+      )
+    `);
+    
     console.log('Database initialized successfully');
   } catch (error) {
     console.error('Database initialization error:', error);
-    // Continue anyway - migrations might already be run
+    // Continue anyway - tables might already exist
   }
 };
 
